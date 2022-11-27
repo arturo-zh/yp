@@ -1,0 +1,81 @@
+.section {
+    width: 50%;
+    padding-top: 60px;
+    margin-left: auto;
+    composes: pl-5 pr-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+}
+
+.sd3324 {
+    composes: text_type_main-large from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: mb-5 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+}
+
+.listing {
+    composes: pl-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+}
+
+.listingTop, .listingBot {
+    composes: ml-8 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+}
+
+.listingMid {
+    composes: mt-4 mb-4 pr-2 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    max-height: calc(100vh - 536px);
+    margin-right: -16px;
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+}
+
+.listingMid::-webkit-scrollbar {
+    width: 8px;
+}
+
+.listingMid::-webkit-scrollbar-track {
+    background: #2F2F37;
+}
+
+.listingMid::-webkit-scrollbar-thumb {
+    background: #8585AD;
+    border: 3px solid #8585AD;
+}
+
+
+.listingItems {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.listingItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    composes: mb-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+}
+
+
+.listingItem:last-child {
+    margin-bottom: 0;
+}
+
+
+.total {
+    composes: mt-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    display: flex;
+    align-content: center;
+    justify-content: flex-end;
+}
+
+.totalCount {
+    composes: text_type_digits-medium from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: mr-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    display: flex;
+    align-items: center;
+}
+
+.totalCount > span {
+    margin-right: 10px;
+}
