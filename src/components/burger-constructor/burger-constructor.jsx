@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './burger-constructor.module.css';
 import {
   ConstructorElement, DragIcon, CurrencyIcon, Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import {ingredientType} from '../../utils/types';
 
 function BurgerConstructor(props) {
   const element = props.ingredients.filter(el => el.type !== 'bun'),
@@ -15,7 +15,7 @@ function BurgerConstructor(props) {
       <ConstructorElement
           type="top"
           isLocked={true}
-          text={elementFix.name}
+          text={elementFix.name + ' (верх)'}
           price={elementFix.price}
           thumbnail={elementFix.image}
           extraClass={styles.listingTop}
@@ -36,7 +36,7 @@ function BurgerConstructor(props) {
       <ConstructorElement
           type="bottom"
           isLocked={true}
-          text={elementFix.name}
+          text={elementFix.name + ' (низ)'}
           price={elementFix.price}
           thumbnail={elementFix.image}
           extraClass={styles.listingBot}
@@ -47,26 +47,14 @@ function BurgerConstructor(props) {
         <span>{total}</span>
         <CurrencyIcon type={'primary'}/>
       </div>
-      <Button htmlType="button" type={'primary'} size={'large'} >Оформить заказ</Button>
+      <Button htmlType="button" type={'primary'} size={'large'}>Оформить
+        заказ</Button>
     </div>
   </section>);
 }
 
 BurgerConstructor.propTypes = {
-  ingredients: PropTypes.arrayOf(PropTypes.shape({
-    _id: PropTypes.string,
-    name: PropTypes.string,
-    type: PropTypes.string,
-    proteins: PropTypes.number,
-    fat: PropTypes.number,
-    carbohydrates: PropTypes.number,
-    calories: PropTypes.number,
-    price: PropTypes.number,
-    image: PropTypes.string,
-    image_mobile: PropTypes.string,
-    image_large: PropTypes.string,
-    __v: PropTypes.number,
-  }).isRequired).isRequired,
+  ...ingredientType
 };
 
 export default BurgerConstructor;
