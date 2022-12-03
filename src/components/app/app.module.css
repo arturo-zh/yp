@@ -1,0 +1,13 @@
+.app {
+    max-height: 100vh;
+    /*overflow: hidden;*/
+}
+
+.main {
+    margin: 0 auto;
+    max-width: 1240px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
