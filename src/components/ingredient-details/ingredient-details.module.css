@@ -1,0 +1,50 @@
+.content {
+    text-align: center;
+    composes: pl-15 pr-15 pb-5 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+}
+
+.image {
+    position: relative;
+    padding-top: 47%;
+    composes: mb-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+
+}
+
+.image img {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+}
+
+.name {
+    composes: text text_type_main-medium from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: mb-8 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+}
+
+
+.props {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    list-style: none;
+    composes: text text_type_main-default text_color_inactive from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+
+}
+
+.prop {
+    width: 25%;
+}
+
+.count {
+    padding-top: 6px;
+    display: block;
+    composes: text text_type_digits-default text_color_inactive from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}
