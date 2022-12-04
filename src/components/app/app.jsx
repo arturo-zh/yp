@@ -10,10 +10,16 @@ const App = () => {
 
   React.useEffect(() => {
     fetch(URL)
-    .then((response) => response.json())
+    .then(res => {
+          if (res.ok) {
+            return res.json();
+          }
+          return Promise.reject(`${res.status}`);
+        }
+    )
     .then((data) => setData(data.data))
     .catch((error) => {
-      console.error('Error:', error);
+      console.error('Ошибка:', error);
     });
   }, []);
 

@@ -9,8 +9,8 @@ const modalRoot = document.getElementById('modals');
 
 const Modal = (props) => {
   React.useEffect(() => {
-    function handleKeyClose(e) {
-      if (e.keyCode === 27) {
+    function handleKeyClose(evt) {
+      if (evt.key === 'Escape') {
         props.handleClose();
       }
     }

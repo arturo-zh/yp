@@ -3,18 +3,18 @@ import styles from './burger-irngredients.module.css';
 import {
   Tab, CurrencyIcon, Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import {ingredientsType} from '../../utils/types';
+import {ingredientsArrayType} from '../../utils/types';
 
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 
 const BurgerIngredients = (props) => {
 
-  const ingredientsType = [
+  const ingredientsArrayType = [
     {'code': 'bun', 'value': 'Булки'},
     {'code': 'sauce', 'value': 'Соусы'},
     {'code': 'main', 'value': 'Начинки'}];
-  const [current, setCurrent] = React.useState(ingredientsType[0].code);
+  const [current, setCurrent] = React.useState(ingredientsArrayType[0].code);
 
   const [openModal, setOpenModal] = React.useState(false);
   const [currentIngredient, setCurrentIngredient] = React.useState(null);
@@ -32,7 +32,7 @@ const BurgerIngredients = (props) => {
         <h1 className={styles.title}>Соберите бургер</h1>
 
         <div className={styles.tabs}>
-          {ingredientsType.map(type => (<Tab
+          {ingredientsArrayType.map(type => (<Tab
               value={type.code}
               active={type.code === current}
               onClick={setCurrent}
@@ -42,7 +42,7 @@ const BurgerIngredients = (props) => {
         </div>
 
         <div className={styles.types}>
-          {ingredientsType.map(
+          {ingredientsArrayType.map(
               type => (<div className={styles.type} key={type.code}>
                 <div className={styles.typeHeader}>
                   <p className={styles.typeTitle}>{type.value}</p>
@@ -82,7 +82,7 @@ const BurgerIngredients = (props) => {
 };
 
 BurgerIngredients.propTypes = {
-  ...ingredientsType,
+  ...ingredientsArrayType,
 };
 
 export default BurgerIngredients;

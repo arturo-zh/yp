@@ -3,7 +3,7 @@ import styles from './burger-constructor.module.css';
 import {
   ConstructorElement, DragIcon, CurrencyIcon, Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import {ingredientsType} from '../../utils/types';
+import {ingredientsArrayType} from '../../utils/types';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 
@@ -74,7 +74,7 @@ const BurgerConstructor = (props) => {
 };
 
 BurgerConstructor.propTypes = {
-  ...ingredientsType,
+  ...ingredientsArrayType,
 };
 
 export default BurgerConstructor;
