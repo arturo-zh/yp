@@ -3,9 +3,26 @@ import AppHeader from './../app-header/app-header';
 import styles from './app.module.css';
 import BurgerIngredients from '../burger-irngredients/burger-irngredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import {data} from '../../utils/data';
+import {URL} from '../../utils/parameters';
 
-function App() {
+const App = () => {
+  const [data, setData] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch(URL)
+    .then(res => {
+          if (res.ok) {
+            return res.json();
+          }
+          return Promise.reject(`${res.status}`);
+        }
+    )
+    .then((data) => setData(data.data))
+    .catch((error) => {
+      console.error('Ошибка:', error);
+    });
+  }, []);
+
   return (
       <div className={styles.app}>
         <AppHeader/>
@@ -15,6 +32,6 @@ function App() {
         </main>
       </div>
   );
-}
+};
 
 export default App;

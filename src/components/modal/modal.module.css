@@ -1,0 +1,39 @@
+
+
+.inner {
+    z-index: 100;
+    position: relative;
+    max-width: 720px;
+    width: 100%;
+    background: #1C1C21;
+    border: 1px solid rgba(76, 76, 255, 0.2);
+    box-shadow: 0 24px 32px rgba(0, 0, 0, 0.04), 0 16px 24px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.04), 0 0 1px rgba(0, 0, 0, 0.04);
+    border-radius: 40px;
+    composes: p-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    composes: pt-3 pb-3 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+}
+
+.title {
+    composes: text text_type_main-large from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+
+}
+
+.close {
+    position: absolute;
+    top: 60px;
+    right: 40px;
+    cursor: pointer;
+    transition: .2s ease opacity;
+}
+
+.close:hover {
+    opacity: 0.6;
+}
+
+
