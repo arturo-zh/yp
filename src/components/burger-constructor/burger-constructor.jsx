@@ -1,24 +1,29 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styles from './burger-constructor.module.css';
 import {
   ConstructorElement, DragIcon, CurrencyIcon, Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import {ingredientsArrayType} from '../../utils/types';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
+import {IngredientsContext} from "../../utils/appContext";
+import {sendOrder} from "../../utils/burger-api";
 
-const BurgerConstructor = (props) => {
-  const element = props.ingredients.filter(el => el.type !== 'bun'),
-      elementFix = props.ingredients.find(el => el.type === 'bun'),
-      total = props.ingredients.reduce((value, el) => el.price + value, 0);
+const BurgerConstructor = () => {
+  const {ingredients} = useContext(IngredientsContext);
+  const [order, setOrder] = React.useState(null);
 
-  const [openModal, setOpenModal] = React.useState(false);
+  const element = ingredients.filter(el => el.type !== 'bun'),
+      elementFix = ingredients.find(el => el.type === 'bun'),
+      total = ingredients.reduce((value, el) => el.price + value, 0);
 
-  const handleOpenModal = () => {
-    setOpenModal(true);
+  const handleClick = () => {
+    const orderData = ingredients.map(el => el._id);
+    sendOrder(orderData)
+    .then(order => setOrder(order.number))
+    .catch(() => alert("Во время оформления заказа произошла ошибка"));
   };
   const handleCloseModal = () => {
-    setOpenModal(false);
+    setOrder(null);
   };
 
   return (
@@ -63,18 +68,14 @@ const BurgerConstructor = (props) => {
               htmlType="button"
               type={'primary'}
               size={'large'}
-              onClick={handleOpenModal}>Оформить
+              onClick={handleClick}>Оформить
             заказ</Button>
         </div>
-        {openModal && (<Modal handleClose={handleCloseModal} title={''}>
-          <OrderDetails/>
+        {order && (<Modal handleClose={handleCloseModal} title={''}>
+          <OrderDetails order={order}/>
         </Modal>)}
       </section>
   );
-};
-
-BurgerConstructor.propTypes = {
-  ...ingredientsArrayType,
 };
 
 export default BurgerConstructor;
