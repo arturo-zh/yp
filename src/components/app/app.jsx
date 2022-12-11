@@ -3,35 +3,44 @@ import AppHeader from './../app-header/app-header';
 import styles from './app.module.css';
 import BurgerIngredients from '../burger-irngredients/burger-irngredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import {URL} from '../../utils/parameters';
+import {getIngredients} from '../../utils/burger-api';
+import PreLoader from "../preloader/preloader";
+import {IngredientsContext} from "../../utils/appContext";
+import {ingredientsArrayType} from "../../utils/types";
+import PropTypes from "prop-types";
 
 const App = () => {
-  const [data, setData] = React.useState([]);
+  const [ingredients, setIngredients] = React.useState([]);
+  const [ingredientsLoader, seIngredientsLoader] = React.useState(true);
 
   React.useEffect(() => {
-    fetch(URL)
-    .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`${res.status}`);
-        }
-    )
-    .then((data) => setData(data.data))
-    .catch((error) => {
-      console.error('Ошибка:', error);
-    });
+    getIngredients()
+    .then(data => setIngredients(data.data))
+    .catch(() => alert("Во время загрузки ингредиента произошла ошибка"))
+    .finally(() => seIngredientsLoader(false));
   }, []);
 
   return (
       <div className={styles.app}>
         <AppHeader/>
-        <main className={styles.main}>
-          <BurgerIngredients ingredients={data}/>
-          <BurgerConstructor ingredients={data}/>
-        </main>
+        {ingredientsLoader ? (
+            <PreLoader/>
+        ) : (
+            <IngredientsContext.Provider value={{ingredients}}>
+              <main className={styles.main}>
+                <BurgerIngredients />
+                <BurgerConstructor />
+              </main>
+            </IngredientsContext.Provider>
+        )}
       </div>
   );
 };
+
+IngredientsContext.Provider.propTypes = {
+  value: PropTypes.shape({
+    ...ingredientsArrayType
+  })
+}
 
 export default App;
