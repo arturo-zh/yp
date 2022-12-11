@@ -4,9 +4,9 @@ import BurgerIrngredient from "../burger-irngredient/burger-irngredient";
 import {ingredientsArrayType} from "../../utils/types";
 import PropTypes from 'prop-types';
 
-const IngredientCategory = ({title, titleId, ingredients, onIngredientClick}) => {
+const IngredientCategory = ({title, ingredients, onIngredientClick, tabRef}) => {
   return (
-      <div className={styles.type} id={titleId}>
+      <div className={styles.type} ref={tabRef}>
         <div className={styles.header}>
           <p className={styles.title}>{title}</p>
         </div>
@@ -32,7 +32,7 @@ const IngredientCategory = ({title, titleId, ingredients, onIngredientClick}) =>
 
 IngredientCategory.propTypes = {
   title: PropTypes.string.isRequired,
-  titleId: PropTypes.string.isRequired,
+  tabRef: PropTypes.shape({current: PropTypes.instanceOf(Element)}).isRequired,
   ...ingredientsArrayType,
   onIngredientClick: PropTypes.func.isRequired,
 };

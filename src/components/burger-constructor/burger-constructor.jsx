@@ -19,7 +19,7 @@ const BurgerConstructor = () => {
   const handleClick = () => {
     const orderData = ingredients.map(el => el._id);
     sendOrder(orderData)
-    .then(order => setOrder(order.number))
+    .then(order => setOrder(order.order.number))
     .catch(() => alert("Во время оформления заказа произошла ошибка"));
   };
   const handleCloseModal = () => {

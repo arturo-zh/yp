@@ -15,7 +15,7 @@ const App = () => {
 
   React.useEffect(() => {
     getIngredients()
-    .then(setIngredients)
+    .then(data => setIngredients(data.data))
     .catch(() => alert("Во время загрузки ингредиента произошла ошибка"))
     .finally(() => seIngredientsLoader(false));
   }, []);
