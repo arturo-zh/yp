@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './ingredient-category.module.css';
-import BurgerIrngredient from "../burger-irngredient/burger-irngredient";
+import BurgerIngredient from "../burger-ingredient/burger-ingredient";
 import {ingredientsArrayType} from "../../utils/types";
 import PropTypes from 'prop-types';
 
@@ -15,10 +15,9 @@ const IngredientCategory = ({title, ingredients, onIngredientClick, tabRef}) => 
             {
               ingredients.map((ingredient) => {
                 return (
-                    <BurgerIrngredient
+                    <BurgerIngredient
                         ingredientData={ingredient}
                         key={ingredient._id}
-                        count={1}
                         onClick={onIngredientClick}
                     />
                 )
@@ -32,7 +31,7 @@ const IngredientCategory = ({title, ingredients, onIngredientClick, tabRef}) => 
 
 IngredientCategory.propTypes = {
   title: PropTypes.string.isRequired,
-  tabRef: PropTypes.shape({current: PropTypes.instanceOf(Element)}).isRequired,
+  tabRef: PropTypes.func.isRequired,
   ...ingredientsArrayType,
   onIngredientClick: PropTypes.func.isRequired,
 };
