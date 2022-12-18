@@ -64,7 +64,7 @@ const BurgerIngredients = () => {
   }
 
   return (<>
-    {burgerIngredientsRequest ? <Preloader/> : burgerIngredientsFailed ? "Ошибка" :
+    {burgerIngredientsRequest ? <Preloader/> : burgerIngredientsFailed ? "Во время загрузки ингредиента произошла ошибка" :
         <section className={styles.section}>
           <h1 className={styles.title}>Соберите бургер</h1>
           <div className={styles.tabs}>

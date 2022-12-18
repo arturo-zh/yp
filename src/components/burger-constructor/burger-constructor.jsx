@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import styles from './burger-constructor.module.css';
-import {ConstructorElement, CurrencyIcon, Button,} from '@ya.praktikum/react-developer-burger-ui-components';
+import {ConstructorElement, CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-components';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import {useSelector, useDispatch} from "react-redux";
@@ -10,10 +10,11 @@ import {addBunConstructor, addIngredientConstructor} from "../../services/action
 import uuid from 'react-uuid';
 import ConstructorIngredient from "../constructor-ingredient/constructor-ingredient";
 import {decreaseIngredient, increaseIngredient} from "../../services/actions/burger-ingredients";
+import Preloader from "../preloader/preloader";
 
 const BurgerConstructor = () => {
   const {items: ingredients, bun} = useSelector((state) => state.burgerConstructor);
-  const {order, orderFailed} = useSelector((state) => state.orderDetails)
+  const {order, orderRequest, orderFailed} = useSelector((state) => state.orderDetails)
   const dispatch = useDispatch();
 
   const total = bun ? ingredients.reduce((value, el) => el.price + value, 0) + (bun.price * 2) : '';
@@ -47,6 +48,8 @@ const BurgerConstructor = () => {
 
   return (
       <section className={styles.section} ref={refDrop}>
+        {orderRequest && <Preloader/>}
+
         {!ingredients.length && !bun &&
             <div className={styles.empty}>
               Перетащите ингредиенты для добавления в заказ
@@ -78,8 +81,7 @@ const BurgerConstructor = () => {
               extraClass={styles.listingBot}
           />)}
         </div>
-
-        {total > 0 && ingredients.length &&
+        {total && ingredients.length > 0 &&
             <div className={styles.total}>
               <div className={styles.totalCount}>
                 <span>{total}</span>
