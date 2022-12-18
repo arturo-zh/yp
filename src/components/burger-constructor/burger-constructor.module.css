@@ -10,6 +10,19 @@
     composes: mb-5 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
 }
 
+.empty{
+    height: 70vh;
+    border: 3px dashed #2f2f37;
+    border-radius: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    composes: p-5 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    composes: text_type_main-default text_color_inactive from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+
+
+}
+
 .listing {
     composes: pl-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
 }

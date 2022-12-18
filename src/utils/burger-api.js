@@ -13,11 +13,11 @@ const request = (url, options = {}) => {
   });
 }
 
-export const getIngredients = () => {
+export const getIngredientsRequest = () => {
   return request(`${BURGER_API_URL}/ingredients`)
 };
 
-export const sendOrder = (items) => {
+export const sendOrderRequest = (items) => {
   const body = {'ingredients': items}
   return request(`${BURGER_API_URL}/orders`, {
     method: 'POST', headers: {
