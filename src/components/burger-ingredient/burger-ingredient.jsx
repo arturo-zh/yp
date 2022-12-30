@@ -2,18 +2,14 @@ import React from 'react';
 import styles from "../burger-ingredient/burger-ingredient.module.css";
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import {ingredientPropType} from "../../utils/types";
-import PropTypes from "prop-types";
 import {useDrag} from "react-dnd";
 import {useSelector} from "react-redux";
 
 
-const BurgerIngredient = ({ingredientData, onClick}) => {
+const BurgerIngredient = ({ingredientData}) => {
   const {_id: id, image, price, name} = ingredientData;
   const count = useSelector((state) => state.burgerIngredients.amountIngredient[id]);
 
-  const handleClick = () => {
-    onClick(ingredientData);
-  }
 
   const [, dragRef] = useDrag(() => ({
         type: `${ingredientData.type}`,
@@ -22,7 +18,7 @@ const BurgerIngredient = ({ingredientData, onClick}) => {
   )
 
   return (
-      <div className={styles.cart} onClick={handleClick} ref={dragRef}>
+      <div className={styles.cart} ref={dragRef}>
         <div className={styles.inner}>
           {count > 0 && <Counter count={count} size="default" extraClass={styles.cartCount}/>}
           <div className={styles.image}><img src={image} alt={name}/></div>
@@ -37,8 +33,7 @@ const BurgerIngredient = ({ingredientData, onClick}) => {
 }
 
 BurgerIngredient.propTypes = {
-  ingredientData: ingredientPropType,
-  onClick: PropTypes.func.isRequired
+  ingredientData: ingredientPropType
 }
 
 export default React.memo(BurgerIngredient)

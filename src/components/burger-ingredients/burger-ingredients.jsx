@@ -1,16 +1,11 @@
 import React, {useEffect, useMemo} from 'react';
 import styles from './burger-ingredients.module.css';
-import {
-  Tab
-} from '@ya.praktikum/react-developer-burger-ui-components';
-import Modal from '../modal/modal';
-import IngredientDetails from '../ingredient-details/ingredient-details';
+import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientCategory from "../ingredient-category/ingredient-category";
 import {useInView} from "react-intersection-observer";
 import {useSelector, useDispatch} from "react-redux";
 import {getIngredients} from "../../services/actions/burger-ingredients";
 import Preloader from "../preloader/preloader";
-import {HIDE_INGREDIENT_DETAILS, SHOW_INGREDIENT_DETAILS} from "../../services/actions/ingredient-details";
 
 
 const BurgerIngredients = () => {
@@ -18,26 +13,12 @@ const BurgerIngredients = () => {
     burgerIngredients, burgerIngredientsRequest, burgerIngredientsFailed
   } = useSelector((store) => store.burgerIngredients);
 
-  const ingredientInModal = useSelector((store) => store.ingredientDetails.currentIngredient);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getIngredients())
   }, [dispatch]);
 
-
-  const openIngredientModal = (item) => {
-    dispatch({
-      type: SHOW_INGREDIENT_DETAILS,
-      payload: item
-    })
-  };
-  const closeIngredientModal = () => {
-    dispatch({
-      type: HIDE_INGREDIENT_DETAILS
-    })
-  };
 
   const buns = useMemo(() => burgerIngredients.filter((el) => el.type === "bun"), [burgerIngredients]);
   const sauces = useMemo(() => burgerIngredients.filter((el) => el.type === "sauce"), [burgerIngredients]);
@@ -73,17 +54,17 @@ const BurgerIngredients = () => {
             <Tab value='main' active={!inViewSauce && inViewMain} onClick={onTabClick}>Начинки</Tab>
           </div>
           <div className={styles.types}>
-            <IngredientCategory title="Булки" ingredients={buns} onIngredientClick={openIngredientModal}
+            <IngredientCategory title="Булки" ingredients={buns}
                                 tabRef={refBun}/>
-            <IngredientCategory title="Соусы" ingredients={sauces} onIngredientClick={openIngredientModal}
+            <IngredientCategory title="Соусы" ingredients={sauces}
                                 tabRef={refSauce}/>
-            <IngredientCategory title="Начинка" ingredients={main} onIngredientClick={openIngredientModal}
+            <IngredientCategory title="Начинка" ingredients={main}
                                 tabRef={refMain}/>
           </div>
 
-          {ingredientInModal && (<Modal handleClose={closeIngredientModal} title={'Детали ингредиента'}>
-            <IngredientDetails/>
-          </Modal>)}
+          {/*{ingredientInModal && (<Modal handleClose={closeIngredientModal} title={'Детали ингредиента'}>*/}
+          {/*  <IngredientDetails/>*/}
+          {/*</Modal>)}*/}
         </section>}
   </>);
 };

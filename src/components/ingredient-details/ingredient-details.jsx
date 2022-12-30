@@ -1,9 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './ingredient-details.module.css';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {useParams} from "react-router-dom";
+import {SHOW_INGREDIENT_DETAILS} from "../../services/actions/ingredient-details";
 
 const IngredientDetails = () => {
-  const ingredient = useSelector((store) => store.ingredientDetails.currentIngredient);
+  const dispatch = useDispatch();
+  const {id} = useParams()
+  const ingredient = useSelector((store) => store.burgerIngredients.burgerIngredients).find((item) => item._id === id)
+
+  useEffect(() => {
+    dispatch({
+      type: SHOW_INGREDIENT_DETAILS,
+      item: ingredient
+    })
+  }, [dispatch, ingredient])
+
+  if (!ingredient) {
+    return null
+  }
 
   return (<div className={styles.content}>
     <div className={styles.image}>

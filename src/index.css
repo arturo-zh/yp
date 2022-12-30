@@ -1,34 +1,62 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: #131316;
-  color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #131316;
+    color: #fff;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
 
 a {
-  position: relative;
-  text-decoration: none;
-  transition: color .1s ease;
+    position: relative;
+    text-decoration: none;
+    transition: color .1s ease;
 }
 
-a,a:hover {
-  color: inherit
+a, a:hover {
+    color: inherit
 }
 
 a:hover {
-  outline: none
+    outline: none
 }
 
 * {
-  box-sizing: border-box
+    box-sizing: border-box
+}
+
+.account {
+    margin: 60px auto 0;
+}
+
+.account__header {
+    text-align: center;
+}
+.account__body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.account__body > *:not(:last-child) {
+    margin-bottom: 24px;
+}
+
+.account__footer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.account__link{
+    color: #4C4CFF;
 }
