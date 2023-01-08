@@ -37,7 +37,6 @@ export const ProfilePage = () => {
     dispatch(updateUserThunk({email, name, password}))
   }, [dispatch, email, password, name]);
 
-  console.log(user);
 
   return (<div className={styles.inner}>
     <div className={styles.aside}>

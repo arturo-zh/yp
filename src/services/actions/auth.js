@@ -110,7 +110,7 @@ export function logoutUser() {
 
 export function updateToken(refreshToken) {
   return function () {
-    sendUpdateToken(refreshToken)
+    return sendUpdateToken(refreshToken)
     .then((res) => {
       const token = res.accessToken.split('Bearer ')[1];
       const refreshToken = res.refreshToken;
@@ -138,7 +138,7 @@ export function getUserThunk() {
       return;
     }
     if (!token) {
-      dispatch(updateToken(refreshToken)).then((res) => dispatch(getUserInfoThunk(res.token)));
+      dispatch(updateToken(refreshToken)).then((res) => dispatch(getUserInfoThunk(res)));
     } else {
       dispatch(getUserInfoThunk(token));
     }

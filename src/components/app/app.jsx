@@ -46,7 +46,7 @@ const App = () => {
               <ProtectedRoute onlyForAuth={true} path="/profile" exact={true}>
                 <ProfilePage/>
               </ProtectedRoute>
-              <ProtectedRoute path="/profile/orders" exact={true}>
+              <ProtectedRoute onlyForAuth={true}  path="/profile/orders" exact={true}>
                 <ProfilePage/>
               </ProtectedRoute>
               <ModalSwitch />

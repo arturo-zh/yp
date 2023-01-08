@@ -46,7 +46,6 @@ export const sendResetPassword = (password, token) => {
 
 export const sendRegisterUser = (name, email, password) => {
   const body = {'name': name, 'email': email, 'password': password}
-  console.log(body);
   return request(`${BURGER_API_URL}/auth/register`, {
     method: 'POST',
     headers: {
@@ -58,7 +57,6 @@ export const sendRegisterUser = (name, email, password) => {
 
 export const sendLoginUser = (email, password) => {
   const body = {'email': email, 'password': password}
-  console.log(body);
   return request(`${BURGER_API_URL}/auth/login`, {
     method: 'POST',
     headers: {
@@ -84,7 +82,7 @@ export const sendUpdateToken = (refreshToken) => {
   return request(`${BURGER_API_URL}/auth/token`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json;charset=utf-8",
     },
     body: JSON.stringify(body)
   })

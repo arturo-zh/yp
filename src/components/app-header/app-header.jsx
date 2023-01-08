@@ -22,7 +22,7 @@ function AppHeader() {
           <a href="/" className={styles.logo}>
             <Logo/>
           </a>
-          <NavLink exact={true}  className={styles.link} to={{ pathname: '/profile' }} activeClassName={styles.linkActive}>
+          <NavLink className={styles.link} to={{ pathname: '/profile' }} activeClassName={styles.linkActive}>
             <ProfileIcon type="primary"/>
             <span className={'text text_type_main-default'}>Личный кабинет</span>
           </NavLink>
