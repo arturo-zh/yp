@@ -14,7 +14,7 @@ function AppHeader() {
               <BurgerIcon type="primary"/>
               <span className={'text text_type_main-default'}>Конструктор</span>
             </NavLink>
-            <NavLink exact={true} className={styles.link} to={{ pathname: ' /profile/orders' }} activeClassName={styles.linkActive}>
+            <NavLink exact={true} className={styles.link} to={{ pathname: '/feed' }} activeClassName={styles.linkActive}>
               <ListIcon type="primary"/>
               <span className={'text text_type_main-default'}>Лента заказов</span>
             </NavLink>

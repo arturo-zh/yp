@@ -175,7 +175,7 @@ export function updateUserThunk(userInfo) {
       return;
     }
     if (!token) {
-      dispatch(updateToken(refreshToken)).then((res) => dispatch(updateUserInfoThunk(res.token, userInfo)))
+      dispatch(updateToken(refreshToken)).then((res) => dispatch(updateUserInfoThunk(res, userInfo)))
     } else {
       dispatch(updateUserInfoThunk(token, userInfo))
     }
