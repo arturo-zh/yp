@@ -14,7 +14,8 @@ import Preloader from "../preloader/preloader";
 
 const BurgerConstructor = () => {
   const {items: ingredients, bun} = useSelector((state) => state.burgerConstructor);
-  const {order, orderRequest, orderFailed} = useSelector((state) => state.orderDetails)
+  const {order, orderRequest, orderFailed} = useSelector((state) => state.orderDetails);
+  const { user } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
 
   const total = bun ? ingredients.reduce((value, el) => el.price + value, 0) + (bun.price * 2) : '';
@@ -81,7 +82,7 @@ const BurgerConstructor = () => {
               extraClass={styles.listingBot}
           />)}
         </div>
-        {total && ingredients.length > 0 &&
+        {user && total && ingredients.length > 0 &&
             <div className={styles.total}>
               <div className={styles.totalCount}>
                 <span>{total}</span>
@@ -95,6 +96,7 @@ const BurgerConstructor = () => {
                 заказ</Button>
             </div>
         }
+        {!user && ingredients.length > 0 && <p className="text text_type_main-small mt-5">Авторизируйтесь, чтобы сделать заказ</p>}
         {orderFailed ? <p>Во время оформления заказа произошла ошибка</p> : null}
         {order && (<Modal handleClose={handleCloseModal} title={''}>
           <OrderDetails order={order}/>

@@ -20,3 +20,8 @@
     flex-wrap: wrap;
     margin: -16px -12px;
 }
+
+.link {
+    display: block;
+    width: 50%;
+}
