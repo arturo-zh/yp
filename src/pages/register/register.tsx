@@ -6,15 +6,16 @@ import {registerUser} from "../../services/actions/auth";
 import Preloader from "../../components/preloader/preloader";
 
 export const RegisterPage = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
-  const {message, registerRequest, registerFailed} = useSelector((store) => store.auth)
+  const {message, registerRequest, registerFailed} = useSelector((store: any) => store.auth)
 
   const dispatch = useDispatch();
 
-  const onSubmit = useCallback((e) => {
+  const onSubmit = useCallback((e:React.FormEvent<HTMLFormElement>) => {
+    //@ts-ignore
     dispatch(registerUser(name, email, password))
     e.preventDefault();
   }, [name, email, password, dispatch])

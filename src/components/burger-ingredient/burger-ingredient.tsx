@@ -1,22 +1,23 @@
 import React from 'react';
 import styles from "../burger-ingredient/burger-ingredient.module.css";
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import {ingredientPropType} from "../../utils/types";
+import { TIngredient} from "../../utils/types";
 import {useDrag} from "react-dnd";
 import {useSelector} from "react-redux";
 
+type TBurgerIngredient = {
+  ingredientData: TIngredient;
+};
 
-const BurgerIngredient = ({ingredientData}) => {
+const BurgerIngredient = ({ingredientData}: TBurgerIngredient): JSX.Element => {
   const {_id: id, image, price, name} = ingredientData;
-  const count = useSelector((state) => state.burgerIngredients.amountIngredient[id]);
-
-
+  const count = useSelector((state:any) => state.burgerIngredients.amountIngredient[id]);
+  
   const [, dragRef] = useDrag(() => ({
         type: `${ingredientData.type}`,
         item: {...ingredientData},
       }), [ingredientData]
   )
-
   return (
       <div className={styles.cart} ref={dragRef}>
         <div className={styles.inner}>
@@ -30,10 +31,6 @@ const BurgerIngredient = ({ingredientData}) => {
         </div>
       </div>
   )
-}
-
-BurgerIngredient.propTypes = {
-  ingredientData: ingredientPropType
 }
 
 export default React.memo(BurgerIngredient)

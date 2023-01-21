@@ -1,10 +1,10 @@
 export const BURGER_API_URL = "https://norma.nomoreparties.space/api";
 
-const checkResponse = (res) => {
+const checkResponse = (res: Response) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err))
 }
 
-const request = (url, options = {}) => {
+const request = (url: string, options?: {}) => {
   return fetch(url, options)
   .then(checkResponse)
   .then((data) => {
@@ -17,7 +17,7 @@ export const getIngredientsRequest = () => {
   return request(`${BURGER_API_URL}/ingredients`)
 };
 
-export const sendOrderRequest = (items) => {
+export const sendOrderRequest = (items: string[]) => {
   const body = {'ingredients': items}
   return request(`${BURGER_API_URL}/orders`, {
     method: 'POST', headers: {
@@ -26,7 +26,7 @@ export const sendOrderRequest = (items) => {
   })
 };
 
-export const sendForgetPassword = (email) => {
+export const sendForgetPassword = (email: string) => {
   const body = {'email': email}
   return request(`${BURGER_API_URL}/password-reset`, {
     method: 'POST', headers: {
@@ -35,7 +35,7 @@ export const sendForgetPassword = (email) => {
   })
 }
 
-export const sendResetPassword = (password, token) => {
+export const sendResetPassword = (password: string, token: string) => {
   const body = {'password': password, 'token': token}
   return request(`${BURGER_API_URL}/password-reset/reset`, {
     method: 'POST', headers: {
@@ -44,7 +44,7 @@ export const sendResetPassword = (password, token) => {
   })
 }
 
-export const sendRegisterUser = (name, email, password) => {
+export const sendRegisterUser = (name: string, email: string, password: string) => {
   const body = {'name': name, 'email': email, 'password': password}
   return request(`${BURGER_API_URL}/auth/register`, {
     method: 'POST',
@@ -55,7 +55,7 @@ export const sendRegisterUser = (name, email, password) => {
   })
 }
 
-export const sendLoginUser = (email, password) => {
+export const sendLoginUser = (email: string, password: string) => {
   const body = {'email': email, 'password': password}
   return request(`${BURGER_API_URL}/auth/login`, {
     method: 'POST',
@@ -66,7 +66,7 @@ export const sendLoginUser = (email, password) => {
   })
 }
 
-export const sendLogoutUser = (token) => {
+export const sendLogoutUser = (token: string) => {
   const body = {'token': token}
   return request(`${BURGER_API_URL}/auth/logout`, {
     method: 'POST',
@@ -77,7 +77,7 @@ export const sendLogoutUser = (token) => {
   })
 }
 
-export const sendUpdateToken = (refreshToken) => {
+export const sendUpdateToken = (refreshToken: string) => {
   const body = {'token': refreshToken}
   return request(`${BURGER_API_URL}/auth/token`, {
     method: 'POST',
@@ -88,7 +88,7 @@ export const sendUpdateToken = (refreshToken) => {
   })
 }
 
-export const getUserInfo = (token) => {
+export const getUserInfo = (token: string) => {
   return request(`${BURGER_API_URL}/auth/user`, {
     method: 'GET',
     headers: {
@@ -98,7 +98,7 @@ export const getUserInfo = (token) => {
   })
 }
 
-export const updateUserInfo = (token, user) => {
+export const updateUserInfo = (token: string, user: string) => {
   return request(`${BURGER_API_URL}/auth/user`, {
     method: 'PATCH',
     headers: {
