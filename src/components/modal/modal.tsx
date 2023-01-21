@@ -3,15 +3,19 @@ import ReactDOM from 'react-dom';
 import styles from './modal.module.css';
 import {CloseIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import ModalOverlay from '../modal-overlay/modal-overlay';
-import {modalType} from '../../utils/types';
 
-const modalRoot = document.getElementById('modals');
+const modalRoot = document.getElementById('modals') as HTMLElement;
+type TModalProps = {
+  title?: string;
+  handleClose: () => void;
+  children: React.ReactNode;
+}
 
-const Modal = (props) => {
+const Modal = ({title, handleClose, children}:TModalProps) => {
   React.useEffect(() => {
-    function handleKeyClose(evt) {
+    function handleKeyClose(evt: KeyboardEvent) {
       if (evt.key === 'Escape') {
-        props.handleClose();
+        handleClose();
       }
     }
 
@@ -20,13 +24,13 @@ const Modal = (props) => {
   });
 
   return ReactDOM.createPortal(
-      <ModalOverlay handleClose={props.handleClose}>
+      <ModalOverlay handleClose={handleClose}>
         <div className={styles.inner}>
-          {props.title && (<div className={styles.header}>
-            <div className={styles.title}>{props.title}</div>
+          {title && (<div className={styles.header}>
+            <div className={styles.title}>{title}</div>
           </div>)}
-          {props.children}
-          <div className={styles.close} onClick={props.handleClose}>
+          {children}
+          <div className={styles.close} onClick={handleClose}>
             <CloseIcon type="primary"/>
           </div>
         </div>
@@ -35,6 +39,5 @@ const Modal = (props) => {
   );
 };
 
-Modal.propTypes = modalType;
 
 export default Modal;

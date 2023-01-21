@@ -3,10 +3,6 @@ import AppHeader from './../app-header/app-header';
 import styles from './app.module.css';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import {IngredientsContext} from "../../utils/appContext";
-import {ingredientsArrayType} from "../../utils/types";
-import PropTypes from "prop-types";
-
 import {DndProvider} from 'react-dnd';
 import {HTML5Backend} from 'react-dnd-html5-backend';
 import {ForgotPasswordPage, LoginPage, ProfilePage, RegisterPage, ResetPasswordPage} from "../../pages";
@@ -17,13 +13,23 @@ import {getUserThunk} from "../../services/actions/auth";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
 import {HIDE_INGREDIENT_DETAILS} from "../../services/actions/ingredient-details";
+import { Location } from 'history';
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    //@ts-ignore
     dispatch(getUserThunk())
   }, [dispatch]);
+
+  // /* Это нужно для отображения номера заказа в заголовке модального окна,
+  // если оно открыто. Реализация этого может отличаться
+  //  */
+  // const orderNumber = useRouteMatch([
+  //   "/profile/orders/:number",
+  //   "/feed/:number",
+  // ])?.params?.number;
 
   return (
       <div className={styles.app}>
@@ -60,7 +66,7 @@ const App = () => {
 const ModalSwitch = () => {
   const dispatch = useDispatch()
   const history = useHistory();
-  const location = useLocation();
+  const location = useLocation<{background: Location}>();
   const background = location.state && location.state.background;
 
   const closeIngredientModal = useCallback(() => {
@@ -92,13 +98,6 @@ const ModalSwitch = () => {
         }
       </>
   )
-}
-
-
-IngredientsContext.Provider.propTypes = {
-  value: PropTypes.shape({
-    ...ingredientsArrayType
-  })
 }
 
 export default App;

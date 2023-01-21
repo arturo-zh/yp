@@ -7,12 +7,13 @@ import Preloader from "../../components/preloader/preloader";
 
 
 export const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const {message, authFailed, authSuccess, authRequest} = useSelector(store => store.auth)
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const {message, authFailed, authSuccess, authRequest} = useSelector((store: any) => store.auth)
   const dispatch = useDispatch();
-
-  const onSubmit = useCallback((e) => {
+ 
+  const onSubmit = useCallback((e:React.FormEvent<HTMLFormElement>) => {
+    //@ts-ignore
     dispatch(loginUser(email, password))
     e.preventDefault();
   }, [email, password, dispatch])

@@ -1,15 +1,16 @@
-import {useCallback, useState} from "react";
+import React, {useCallback, useState} from "react";
 import {Button, EmailInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, Redirect} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {forgetPassword} from "../../services/actions/reset-password";
 
 export const ForgotPasswordPage = () => {
-  const [email, setEmail] = useState('');
-  const {forgetSuccess} = useSelector(store => store.resetPassword)
+  const [email, setEmail] = useState<string>('');
+  const {forgetSuccess} = useSelector((store:any) => store.resetPassword)
   const dispatch = useDispatch();
-
-  const onSubmit = useCallback((e) => {
+ 
+  const onSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+    //@ts-ignore
     dispatch(forgetPassword(email));
     e.preventDefault();
   }, [email, dispatch]);
@@ -24,7 +25,6 @@ export const ForgotPasswordPage = () => {
                   <EmailInput
                       value={email}
                       name={'email'}
-                      type={'email'}
                       placeholder="Укажите e-mail"
                       isIcon={false}
                       onChange={(e) => setEmail(e.target.value)}
