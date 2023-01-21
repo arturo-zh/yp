@@ -5,7 +5,7 @@ export function getCookie(name: string): string | undefined {
 	return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-export function setCookie(name: string, value: string | null, props?: any): void {
+export function setCookie(name: string, value: string | null, props?: { [key: string]: number | string | Date | boolean }): void {
 	props = {
 		path: "/", 
 		...props
@@ -16,7 +16,8 @@ export function setCookie(name: string, value: string | null, props?: any): void
 		d.setTime(d.getTime() + exp * 1000);
 		exp = props.expires = d;
 	}
-	if (exp && exp.toUTCString) {
+	
+	if (exp && (exp instanceof Date)) {
 		props.expires = exp.toUTCString();
 	}
 	if (value) {

@@ -7,9 +7,10 @@ type TProtectedRouteProps = {
 	children?: React.ReactNode;
 	[name: string]: any;
 };
+const getAuth = (state: any) => state.auth;
 
 const ProtectedRoute = ({onlyForAuth, children, ...rest}: TProtectedRouteProps): JSX.Element => {
-	const {user} = useSelector((store: any) => store.auth);
+	const {user} = useSelector(getAuth);
 	const location = useLocation<{ from: { pathname: string } }>();
 	
 	

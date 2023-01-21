@@ -13,10 +13,14 @@ import {decreaseIngredient, increaseIngredient} from "../../services/actions/bur
 import Preloader from "../preloader/preloader";
 import {TConstructorIngredient, TIngredient} from "../../utils/types";
 
+const getBurgerConstructor = (state: any) => state.burgerConstructor;
+const getOrderDetails = (state: any) => state.orderDetails;
+const getAuth = (state: any) => state.auth;
+
 const BurgerConstructor = (): JSX.Element => {
-	const {items: ingredients, bun} = useSelector((state: any) => state.burgerConstructor);
-	const {order, orderRequest, orderFailed} = useSelector((state: any) => state.orderDetails);
-	const {user} = useSelector((store: any) => store.auth);
+	const {items: ingredients, bun} = useSelector(getBurgerConstructor);
+	const {order, orderRequest, orderFailed} = useSelector(getOrderDetails); 
+	const {user} = useSelector(getAuth);
 	const dispatch = useDispatch();
 	
 	const total = bun ? ingredients.reduce((value: number, el: TIngredient) => el.price + value, 0) + (bun.price * 2) : '';

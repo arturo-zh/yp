@@ -8,11 +8,13 @@ import {getIngredients} from "../../services/actions/burger-ingredients";
 import Preloader from "../preloader/preloader";
 import {TIngredient} from "../../utils/types";
 
+const getBurgerIngredients = (store: any) => store.burgerIngredients;
+
 
 const BurgerIngredients = () => {
 	const {
 		burgerIngredients, burgerIngredientsRequest, burgerIngredientsFailed
-	} = useSelector((store: any) => store.burgerIngredients);
+	} = useSelector(getBurgerIngredients);
 	
 	const dispatch = useDispatch();
 	
