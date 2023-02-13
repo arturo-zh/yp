@@ -1,3 +1,5 @@
+import {TFull, TLogin} from "../services/types/inputs";
+
 export const BURGER_API_URL = "https://norma.nomoreparties.space/api";
 
 const checkResponse = (res: Response) => {
@@ -44,8 +46,8 @@ export const sendResetPassword = (password: string, token: string) => {
   })
 }
 
-export const sendRegisterUser = (name: string, email: string, password: string) => {
-  const body = {'name': name, 'email': email, 'password': password}
+export const sendRegisterUser = (user: TFull) => {
+  const body = {'name': user.name, 'email': user.email, 'password': user.password}
   return request(`${BURGER_API_URL}/auth/register`, {
     method: 'POST',
     headers: {
@@ -55,8 +57,8 @@ export const sendRegisterUser = (name: string, email: string, password: string) 
   })
 }
 
-export const sendLoginUser = (email: string, password: string) => {
-  const body = {'email': email, 'password': password}
+export const sendLoginUser = (user: TLogin) => {
+  const body = {'email': user.email, 'password': user.password}
   return request(`${BURGER_API_URL}/auth/login`, {
     method: 'POST',
     headers: {
@@ -66,7 +68,7 @@ export const sendLoginUser = (email: string, password: string) => {
   })
 }
 
-export const sendLogoutUser = (token: string) => {
+export const sendLogoutUser = (token: string | undefined) => {
   const body = {'token': token}
   return request(`${BURGER_API_URL}/auth/logout`, {
     method: 'POST',
@@ -98,7 +100,7 @@ export const getUserInfo = (token: string) => {
   })
 }
 
-export const updateUserInfo = (token: string, user: string) => {
+export const updateUserInfo = (token: string, user: TFull) => {
   return request(`${BURGER_API_URL}/auth/user`, {
     method: 'PATCH',
     headers: {

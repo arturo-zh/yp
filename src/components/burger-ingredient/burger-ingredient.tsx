@@ -13,7 +13,7 @@ type TBurgerIngredient = {
 
 const BurgerIngredient = ({ingredientData}: TBurgerIngredient): JSX.Element => {
   const {_id: id, image, price, name} = ingredientData;
-  const getAmountIngredient = (state:any) => state.burgerIngredients.amountIngredient[id];
+  const getAmountIngredient = (state:any) => state.burgerIngredients.amountIngredient![id];
   const count = useSelector(getAmountIngredient);
   
   const [, dragRef] = useDrag(() => ({

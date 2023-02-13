@@ -7,6 +7,8 @@ import {compose, createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import { rootReducer } from './services/reducers/root-reducers';
+import {socketMiddleware} from "./services/middleware/socket-middleware";
+import {wsActions} from "./services/types/ws";
 
 
 const composeEnhancers =
@@ -14,9 +16,9 @@ const composeEnhancers =
 		? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
 		: compose;
 
-const enhancer = composeEnhancers(applyMiddleware(thunk));
+const enhancer = composeEnhancers(applyMiddleware(thunk, socketMiddleware(wsActions)));
 
-const store = createStore(rootReducer, enhancer);
+export const store = createStore(rootReducer, enhancer);
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement

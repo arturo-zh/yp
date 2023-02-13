@@ -1,0 +1,120 @@
+
+.orderItem {
+    display: block;
+    background: #1C1C21;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04), 0 0 2px rgba(0, 0, 0, 0.06), 0 0 1px rgba(0, 0, 0, 0.04);
+    border-radius: 40px;
+    width: 100%;
+    composes: p-6 mb-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+}
+
+.orderItem:last-child {
+    margin-bottom: 0;
+}
+
+.orderItemTop {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    composes: mb-6 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+}
+
+.orderItemNum {
+    composes: text text_type_digits-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}
+
+.orderItemDate {
+    color: #8585AD;
+    composes: text text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}
+
+.orderItemMid {
+    composes: mb-6 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+}
+
+.orderItemName {
+    composes: text text_type_main-medium from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}
+.orderItemStatus {
+    composes: text text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}
+
+.orderItemBot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.orderItemIngredients {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.orderItemIngredient {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(63.18deg, #801AB3 0%, #4C4CFF 100%);
+    padding: 2px;
+    position: relative;
+    margin-left: -16px;
+
+}
+
+.orderItemIngredient:first-child {
+    margin-left: 0;
+}
+
+.orderItemIngredientImage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #131316;
+    display: block;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.orderItemIngredientImage img {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: auto;
+}
+
+.orderItemIngredientCount {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    font-size: 16px;
+    border-radius: 50%;
+    background: rgba(28, 28, 33, 0.6);
+}
+
+.orderItemPrice {
+    display: flex;
+    align-items: center;
+    composes: text text_type_digits-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+
+}
+
+.orderItemPrice svg {
+    margin-left: 8px;
+}

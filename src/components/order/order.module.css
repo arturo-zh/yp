@@ -1,0 +1,139 @@
+.inner {
+    width: 640px;
+    margin: 0 auto;
+}
+
+.top {
+    composes: mb-15 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+}
+
+.mid {
+    composes: mb-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+}
+
+.bot {
+
+}
+
+.num {
+    composes: text text_type_digits-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: mb-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    text-align: center;
+}
+
+.name {
+    composes: text text_type_main-medium from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: mb-3 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+
+}
+
+.status {
+    composes: text text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}
+
+.listTitle {
+    composes: text text_type_main-medium from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: mb-6 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+
+}
+
+.bot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.date {
+    composes: text text_type_main-default text_color_inactive from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}
+
+.total {
+    display: flex;
+    align-items: center;
+    composes: text text_type_digits-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}
+
+.totalValue {
+    composes: pr-2 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+}
+
+.list {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+    max-height: 312px;
+    overflow-y: auto;
+}
+.list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.list::-webkit-scrollbar-track {
+    background: #2F2F37;
+}
+
+.list::-webkit-scrollbar-thumb {
+    background: #8585AD;
+    border: 3px solid #8585AD;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    composes: pr-6 mb-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+}
+.item:last-child{
+    margin-bottom: 0;
+}
+
+.itemImageWrap {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(63.18deg, #801AB3 0%, #4C4CFF 100%);
+    padding: 2px;
+    position: relative;
+    composes: mr-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+
+    flex-shrink: 0;
+}
+
+.itemImage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #131316;
+    display: block;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.itemImage img{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.itemName {
+    composes: text text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}
+
+.itemPrice {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    composes: text text_type_digits-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+    composes: pl-2 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.itemPriceValue {
+    composes: pr-2 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+
+}

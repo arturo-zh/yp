@@ -4,17 +4,19 @@ import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-deve
 import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {getUserThunk, logoutUser, updateUserThunk} from "../../services/actions/auth";
 import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch} from "../../services/types/store";
 
 
 export const ProfilePage = () => {
 	const [name, setName] = useState<string>('');
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
+	
+	
 	const {user} = useSelector((store: any) => store.auth)
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 	
 	useEffect(() => {
-		//@ts-ignore
 		dispatch(getUserThunk());
 	}, [dispatch]);
 	
@@ -35,12 +37,10 @@ export const ProfilePage = () => {
 	
 	const onSaveClick = useCallback((e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		//@ts-ignore
 		dispatch(updateUserThunk({email, name, password}))
 	}, [dispatch, email, password, name]);
 	
 	const handleLogout = () => {
-		//@ts-ignore
 		dispatch(logoutUser())
 	}
 	

@@ -3,6 +3,7 @@ import {Button, Input, PasswordInput} from "@ya.praktikum/react-developer-burger
 import {Link, Redirect, useLocation} from "react-router-dom";
 import {resetPassword} from "../../services/actions/reset-password";
 import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch} from "../../services/types/store";
 
 type TLocationWithFrom = Location & {
   from: string;
@@ -11,12 +12,11 @@ type TLocationWithFrom = Location & {
 export const ResetPasswordPage = () => {
 	const [password, setPassword] = useState<string>('');
 	const [token, setToken] = useState<string>('');
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 	const location = useLocation<TLocationWithFrom>();
 	const {forgetSuccess, resetSuccess} = useSelector((store: any) => store.resetPassword)
 	
 	const onSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-		//@ts-ignore
 		dispatch(resetPassword(password, token));
 		e.preventDefault();
 	}, [password, token, dispatch]);
