@@ -8,6 +8,8 @@ import {TOrderDetails} from "../actions/order-details";
 import {TResetPassword} from "../actions/reset-password";
 import {TWSActions} from "../actions/socket";
 
+export type RootState = ReturnType<typeof store.getState>;
+
 export type TApplicationActions =
 	TAuthActions
 	| TConstructorActions
@@ -17,7 +19,6 @@ export type TApplicationActions =
 	| TResetPassword
 	| TWSActions;
 
-export type RootState = ReturnType<typeof store.getState>;
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, TApplicationActions>;
 export type AppDispatch = <TReturnType>(action: TApplicationActions | AppThunk) => TReturnType;
 

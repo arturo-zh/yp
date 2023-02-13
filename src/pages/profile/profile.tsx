@@ -4,7 +4,7 @@ import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-deve
 import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {getUserThunk, logoutUser, updateUserThunk} from "../../services/actions/auth";
 import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch} from "../../services/types/store";
+import {AppDispatch, RootState} from "../../services/types/store";
 
 
 export const ProfilePage = () => {
@@ -13,7 +13,7 @@ export const ProfilePage = () => {
 	const [password, setPassword] = useState<string>('');
 	
 	
-	const {user} = useSelector((store: any) => store.auth)
+	const {user} = useSelector((store: RootState) => store.auth)
 	const dispatch = useDispatch<AppDispatch>();
 	
 	useEffect(() => {

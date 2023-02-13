@@ -7,6 +7,7 @@ import {Link, useLocation} from 'react-router-dom';
 import {TData} from "../../services/types/order";
 import {useSelector} from "react-redux";
 import {TIngredient} from "../../utils/types";
+import {RootState} from "../../services/types/store";
 
 const getOrderStatus = (status: string | undefined) => {
 	switch (status) {
@@ -29,7 +30,7 @@ type TOrderCardProps = {
 
 const OrderList = ({data, from, isShow}: TOrderCardProps): JSX.Element => {
 	const location = useLocation();
-	const ingredients = useSelector((store: any) => store.burgerIngredients.burgerIngredients);
+	const ingredients = useSelector((store: RootState) => store.burgerIngredients.burgerIngredients);
 	
 	return (
 		<>

@@ -37,7 +37,8 @@ export function getOrder(orderData: string[]): AppThunk {
 		sendOrderRequest(orderData)
 			.then((res) => {
 				dispatch({
-					type: GET_ORDER_SUCCESS, order: res.order.number
+					type: GET_ORDER_SUCCESS,
+					order: res.order.number
 				})
 			})
 			.catch(() => dispatch({type: GET_ORDER_ERROR}))

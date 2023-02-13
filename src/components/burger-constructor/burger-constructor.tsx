@@ -12,11 +12,11 @@ import ConstructorIngredient from "../constructor-ingredient/constructor-ingredi
 import {decreaseIngredient, increaseIngredient} from "../../services/actions/burger-ingredients";
 import Preloader from "../preloader/preloader";
 import {TConstructorIngredient, TIngredient} from "../../utils/types";
-import {AppDispatch} from "../../services/types/store";
+import {AppDispatch, RootState} from "../../services/types/store";
 
-const getBurgerConstructor = (state: any) => state.burgerConstructor;
-const getOrderDetails = (state: any) => state.orderDetails;
-const getAuth = (state: any) => state.auth;
+const getBurgerConstructor = (state: RootState) => state.burgerConstructor;
+const getOrderDetails = (state: RootState) => state.orderDetails;
+const getAuth = (state: RootState) => state.auth;
 
 const BurgerConstructor = (): JSX.Element => {
 	const {items: ingredients, bun} = useSelector(getBurgerConstructor);
@@ -24,7 +24,9 @@ const BurgerConstructor = (): JSX.Element => {
 	const {user} = useSelector(getAuth);
 	const dispatch = useDispatch<AppDispatch>();
 	
-	const total = bun ? ingredients.reduce((value: number, el: TIngredient) => el.price + value, 0) + (bun.price * 2) : '';
+	const total: number = bun
+		? 2 * bun.price + (ingredients as TConstructorIngredient[]).reduce((prev, curr) => prev + curr.price, 0)
+		: (ingredients as TConstructorIngredient[]).reduce((prev, curr) => prev + curr.price, 0);
 	
 	const handleClick = useCallback(() => {
 		const orderData = ingredients.map((el: TIngredient) => el._id);

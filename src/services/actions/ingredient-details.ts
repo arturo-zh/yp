@@ -5,7 +5,7 @@ export const HIDE_INGREDIENT_DETAILS: "HIDE_INGREDIENT_DETAILS" = "HIDE_INGREDIE
 
 export interface IShowIngredientDetailsAction {
 	readonly type: typeof SHOW_INGREDIENT_DETAILS;
-	readonly item: TIngredient;
+	readonly item: TIngredient | undefined;
 }
 
 export interface IHideIngredientDetailsAction {

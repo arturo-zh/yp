@@ -3,19 +3,21 @@ import React, {useEffect, useState} from 'react';
 import {CurrencyIcon, FormattedDate} from "@ya.praktikum/react-developer-burger-ui-components";
 import {useParams} from "react-router-dom";
 import {TIngredient} from "../../utils/types";
-import { useSelector} from "react-redux";
-import { TOrder} from "../../services/types/order";
+import {useSelector} from "react-redux";
+import {TOrder} from "../../services/types/order";
+import {RootState} from "../../services/types/store";
+import Preloader from "../preloader/preloader";
 
 const getOrderStatus = (status: string | undefined) => {
 	switch (status) {
 		case 'created':
-			return { text: 'Создан', color: 'white' }
+			return {text: 'Создан', color: 'white'}
 		case 'pending':
-			return { text: 'Готовится', color: 'white' }
+			return {text: 'Готовится', color: 'white'}
 		case 'done':
-			return { text: 'Выполнен', color: '#00CCCC' }
+			return {text: 'Выполнен', color: '#00CCCC'}
 		default:
-			return { text: status, color: 'white' }
+			return {text: status, color: 'white'}
 	}
 };
 
@@ -26,30 +28,28 @@ type TOrderProps = {
 const Order = ({isShow}: TOrderProps) => {
 	const {id} = useParams<{ id: string }>();
 	const [data, setData] = useState<TOrder>();
-	const order = useSelector((store: any) => store.ws.messages)?.orders.find((item: TOrder) => item.number === Number(id))
-	const ingredients = useSelector((store: any) => store.burgerIngredients.burgerIngredients).filter((item: any) => data?.ingredients.includes(item._id))
+	const ingredients = useSelector((store: RootState) => store.burgerIngredients.burgerIngredients).filter((item: any) => data?.ingredients.includes(item._id))
 	let total = 0;
 	
 	useEffect(() => {
-		setData(order)
 		if (!data) {
 			const getOrder = async (id: string) => {
 				try {
 					let response = await fetch(`https://norma.nomoreparties.space/api/orders/${id}`)
-					let result = await response.json()
-					setData(result.orders[0])
-					return result
+					let result = await response.json();
+					return result.orders[0];
 				} catch (error) {
 					console.error((error as Error).message)
 				}
 			}
-			getOrder(id)
+			getOrder(id).then(res => setData(res));
 		}
-	}, [order,data, id]);
+	}, [data, id]);
 	
+	console.log(data);
 	
 	if (!data) {
-		return null;
+		return <Preloader/>
 	}
 	
 	return (

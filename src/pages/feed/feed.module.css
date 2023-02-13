@@ -38,6 +38,8 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .statusTitle {
@@ -46,12 +48,11 @@
 
 }
 
-.statusList {
-}
 
 .statusItem {
     composes: text_type_digits-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
     composes: mb-2 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+    width: 33.333%;
 }
 
 .statusItemDone {

@@ -6,10 +6,10 @@ import {
 import {TIngredient} from "../../utils/types";
 
 type TIngredientDetailsState = {
-	currentIngredient: TIngredient | null
+	currentIngredient: TIngredient | undefined
 }
 const initialState:TIngredientDetailsState = {
-	currentIngredient: null
+	currentIngredient: undefined
 }
 
 export const ingredientDetailsReducer = (state = initialState, action:TIngredientDetailsActions): TIngredientDetailsState => {
@@ -20,7 +20,7 @@ export const ingredientDetailsReducer = (state = initialState, action:TIngredien
 			}
 		case HIDE_INGREDIENT_DETAILS:
 			return {
-				...state, currentIngredient: null
+				...state, currentIngredient: undefined
 			}
 		default:
 			return state

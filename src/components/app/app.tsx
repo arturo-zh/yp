@@ -60,7 +60,7 @@ const App = () => {
 						<ProtectedRoute onlyForAuth={false} path="/reset-password" exact={true}>
 							<ResetPasswordPage/>
 						</ProtectedRoute>
-						<ProtectedRoute onlyForAuth={true} path="/profile" exact={true}>
+						<ProtectedRoute onlyForAuth path="/profile" exact={true}>
 							<ProfilePage/>
 						</ProtectedRoute>
 						<ModalSwitch/>
@@ -102,10 +102,10 @@ const ModalSwitch = () => {
 				<Route path="/feed/:id" exact={true}>
 					<Order isShow={false}/>
 				</Route>
-				<ProtectedRoute onlyForAuth={true} path="/profile/orders" exact={true}>
+				<ProtectedRoute onlyForAuth path="/profile/orders" exact={true}>
 					<ProfileOrdersPage/>
 				</ProtectedRoute>
-				<ProtectedRoute onlyForAuth={true} path="/profile/orders/:id" exact={true}>
+				<ProtectedRoute onlyForAuth path="/profile/orders/:id" exact={true}>
 					<Order isShow={true}/>
 				</ProtectedRoute>
 			</Switch>
@@ -125,7 +125,7 @@ const ModalSwitch = () => {
           </Route>
 			}
 			{background &&
-          <ProtectedRoute onlyForAuth={true} path="/profile/orders/:id">
+          <ProtectedRoute onlyForAuth path="/profile/orders/:id">
             <Modal handleClose={closeIngredientModal} title={''}>
               <Order isShow={true}/>
             </Modal>

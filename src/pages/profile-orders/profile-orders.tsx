@@ -4,20 +4,22 @@ import React, {useEffect} from "react";
 import {logoutUser} from "../../services/actions/auth";
 import OrderList from "../../components/order-list/order-list";
 import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch} from "../../services/types/store";
+import {AppDispatch, RootState} from "../../services/types/store";
 import {WS_CONNECTION_CLOSED, WS_CONNECTION_START} from "../../services/actions/socket";
 import Preloader from "../../components/preloader/preloader";
+import {getCookie} from "../../utils/cookies";
 
 
 export const ProfileOrdersPage = () => {
-	const {wsConnected, messages, error} = useSelector((store:any) => store.ws);
+	const {wsConnected, messages, error} = useSelector((store:RootState) => store.ws);
 	const dispatch = useDispatch<AppDispatch>();
 	
 	const handleLogout = () => {
 		dispatch(logoutUser());
 	}
 	useEffect(() => {
-		dispatch({type: WS_CONNECTION_START, payload: '/all' })
+		const accessToken = getCookie('token');
+		dispatch({type: WS_CONNECTION_START, payload: `?token=${accessToken}` })
 		
 		return () => {
 			dispatch({ type: WS_CONNECTION_CLOSED })

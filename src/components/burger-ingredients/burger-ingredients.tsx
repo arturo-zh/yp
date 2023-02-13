@@ -6,8 +6,9 @@ import {useInView} from "react-intersection-observer";
 import {useSelector} from "react-redux";
 import Preloader from "../preloader/preloader";
 import {TIngredient} from "../../utils/types";
+import {RootState} from "../../services/types/store";
 
-const getBurgerIngredients = (store: any) => store.burgerIngredients;
+const getBurgerIngredients = (store: RootState) => store.burgerIngredients;
 
 
 const BurgerIngredients = () => {

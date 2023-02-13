@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {registerUser} from "../../services/actions/auth";
 import Preloader from "../../components/preloader/preloader";
 import {TFull} from "../../services/types/inputs";
-import {AppDispatch} from "../../services/types/store";
+import {AppDispatch, RootState} from "../../services/types/store";
 
 export const RegisterPage = () => {
   const [registerInfo, setRegisterInfo] = useState<TFull>({
@@ -14,7 +14,7 @@ export const RegisterPage = () => {
     name: ""
   })
 
-  const {message, registerRequest, registerFailed} = useSelector((store: any) => store.auth)
+  const {message, registerRequest, registerFailed} = useSelector((store: RootState) => store.auth)
   
   const dispatch = useDispatch<AppDispatch>();
 

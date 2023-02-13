@@ -3,13 +3,13 @@ import styles from './feed.module.css';
 import OrderList from "../../components/order-list/order-list";
 import {useDispatch, useSelector} from "react-redux";
 import {WS_CONNECTION_CLOSED, WS_CONNECTION_START} from "../../services/actions/socket";
-import {AppDispatch} from "../../services/types/store";
+import {AppDispatch, RootState} from "../../services/types/store";
 import Preloader from "../../components/preloader/preloader";
 
 const VISIBLE_ORDERS_SLICE = 10
 
 export const FeedPage = () => {
-	const {wsConnected, messages, error} = useSelector((store:any) => store.ws);
+	const {wsConnected, messages, error} = useSelector((store:RootState) => store.ws);
 	const dispatch = useDispatch<AppDispatch>();
 	
 	useEffect(() => {
