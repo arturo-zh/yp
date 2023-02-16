@@ -1,14 +1,14 @@
-import React, {useEffect, useMemo} from 'react';
+import React, { useMemo} from 'react';
 import styles from './burger-ingredients.module.css';
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientCategory from "../ingredient-category/ingredient-category";
 import {useInView} from "react-intersection-observer";
-import {useSelector, useDispatch} from "react-redux";
-import {getIngredients} from "../../services/actions/burger-ingredients";
+import {useSelector} from "react-redux";
 import Preloader from "../preloader/preloader";
 import {TIngredient} from "../../utils/types";
+import {RootState} from "../../services/types/store";
 
-const getBurgerIngredients = (store: any) => store.burgerIngredients;
+const getBurgerIngredients = (store: RootState) => store.burgerIngredients;
 
 
 const BurgerIngredients = () => {
@@ -16,12 +16,11 @@ const BurgerIngredients = () => {
 		burgerIngredients, burgerIngredientsRequest, burgerIngredientsFailed
 	} = useSelector(getBurgerIngredients);
 	
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch<AppDispatch>();
 	
-	useEffect(() => {
-		//@ts-ignore
-		dispatch(getIngredients())
-	}, [dispatch]);
+	// useEffect(() => {
+	// 	dispatch(getIngredients())
+	// }, [dispatch]);
 	
 	const buns = useMemo(() => burgerIngredients.filter((el: TIngredient) => el.type === "bun"), [burgerIngredients]);
 	const sauces = useMemo(() => burgerIngredients.filter((el: TIngredient) => el.type === "sauce"), [burgerIngredients]);

@@ -4,21 +4,25 @@ import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {registerUser} from "../../services/actions/auth";
 import Preloader from "../../components/preloader/preloader";
+import {TFull} from "../../services/types/inputs";
+import {AppDispatch, RootState} from "../../services/types/store";
 
 export const RegisterPage = () => {
-  const [name, setName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [registerInfo, setRegisterInfo] = useState<TFull>({
+    email: "",
+    password: "",
+    name: ""
+  })
 
-  const {message, registerRequest, registerFailed} = useSelector((store: any) => store.auth)
-
-  const dispatch = useDispatch();
+  const {message, registerRequest, registerFailed} = useSelector((store: RootState) => store.auth)
+  
+  const dispatch = useDispatch<AppDispatch>();
 
   const onSubmit = useCallback((e:React.FormEvent<HTMLFormElement>) => {
-    //@ts-ignore
-    dispatch(registerUser(name, email, password))
+     
+    dispatch(registerUser(registerInfo));
     e.preventDefault();
-  }, [name, email, password, dispatch])
+  }, [registerInfo, dispatch])
 
   return (
       <>
@@ -29,27 +33,26 @@ export const RegisterPage = () => {
             <div className="account__body">
               <Input
                   type={'text'}
-                  value={name}
+                  value={registerInfo.name}
                   name={'name'}
                   placeholder="Имя"
                   required={true}
-                  onChange={(e) => setName(e.target.value)
-                  }
+                  onChange={e => setRegisterInfo({...registerInfo, name: e.target.value})}
               />
               <EmailInput
-                  value={email}
+                  value={registerInfo.email}
                   name={'email'}
                   placeholder="E-mail"
                   isIcon={false}
                   required={true}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={e => setRegisterInfo({...registerInfo, email: e.target.value})}
               />
               <PasswordInput
-                  value={password}
+                  value={registerInfo.password}
                   placeholder="Пароль"
                   name={'password'}
                   required={true}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={e => setRegisterInfo({...registerInfo, password: e.target.value})}
               />
               {registerFailed && <p className="text text_type_main-default text_color_error">{message}</p>}
               <Button type={'primary'} htmlType='submit' disabled={registerRequest}>Зарегистрироваться</Button>

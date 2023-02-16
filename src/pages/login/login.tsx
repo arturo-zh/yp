@@ -4,17 +4,17 @@ import {Link, Redirect} from "react-router-dom";
 import {loginUser} from "../../services/actions/auth";
 import {useDispatch, useSelector} from "react-redux";
 import Preloader from "../../components/preloader/preloader";
+import {AppDispatch, RootState} from "../../services/types/store";
 
 
 export const LoginPage = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const {message, authFailed, authSuccess, authRequest} = useSelector((store: any) => store.auth)
-  const dispatch = useDispatch();
+  const {message, authFailed, authSuccess, authRequest} = useSelector((store: RootState) => store.auth)
+  const dispatch = useDispatch<AppDispatch>();
  
   const onSubmit = useCallback((e:React.FormEvent<HTMLFormElement>) => {
-    //@ts-ignore
-    dispatch(loginUser(email, password))
+    dispatch(loginUser({email, password}))
     e.preventDefault();
   }, [email, password, dispatch])
 

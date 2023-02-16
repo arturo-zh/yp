@@ -4,6 +4,7 @@ import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-com
 import { TIngredient} from "../../utils/types";
 import {useDrag} from "react-dnd";
 import {useSelector} from "react-redux";
+import {RootState} from "../../services/types/store";
 
 type TBurgerIngredient = {
   ingredientData: TIngredient;
@@ -13,7 +14,7 @@ type TBurgerIngredient = {
 
 const BurgerIngredient = ({ingredientData}: TBurgerIngredient): JSX.Element => {
   const {_id: id, image, price, name} = ingredientData;
-  const getAmountIngredient = (state:any) => state.burgerIngredients.amountIngredient[id];
+  const getAmountIngredient = (state:RootState) => state.burgerIngredients.amountIngredient![id];
   const count = useSelector(getAmountIngredient);
   
   const [, dragRef] = useDrag(() => ({

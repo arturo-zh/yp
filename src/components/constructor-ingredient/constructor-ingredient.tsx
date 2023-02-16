@@ -6,6 +6,7 @@ import {moveIngredientConstructor, removeIngredientConstructor} from "../../serv
 import {useDispatch} from "react-redux";
 import {decreaseIngredient} from "../../services/actions/burger-ingredients";
 import {TConstructorIngredient} from "../../utils/types";
+import {AppDispatch} from "../../services/types/store";
 
 type TConstructorIngredientProps = {
 	ingredient: TConstructorIngredient;
@@ -13,7 +14,7 @@ type TConstructorIngredientProps = {
 };
 
 const ConstructorIngredient = ({ingredient, index}: TConstructorIngredientProps): JSX.Element => {
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 	const ref = useRef<HTMLLIElement>(null);
 	
 	const [{isDragging}, dragRef] = useDrag({
