@@ -1,6 +1,6 @@
 import {sendOrderRequest} from "../../utils/burger-api";
 import {clearOrderItems} from "./burger-constructor";
-import {clearIngredientsAmount} from "./burger-ingredients";
+import {clearIngredientsAmount, getIngredients} from "./burger-ingredients";
 import {AppDispatch, AppThunk} from "../types/store";
 
 export const GET_ORDER_REQUEST: "GET_ORDER_REQUEST" = "GET_ORDER_REQUEST";
@@ -50,7 +50,8 @@ export function clearOrder(): AppThunk {
 		dispatch({
 			type: CLEAR_ORDER
 		});
-		dispatch(clearIngredientsAmount())
 		dispatch(clearOrderItems())
+		dispatch(clearIngredientsAmount())
+		dispatch(getIngredients())
 	}
 }

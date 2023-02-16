@@ -38,7 +38,7 @@ type TInitialState = {
 	updateUserSuccess: boolean,
 }
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
 	user: null,
 	message: null,
 	registerRequest: false,
@@ -68,7 +68,9 @@ export const authReducer = (state = initialState, active: TAuthActions): TInitia
 		}
 		case REGISTER_USER_ERROR: {
 			return {
-				...state, registerRequest: false, registerFailed: true, message: active.message
+				...state, registerRequest: false,
+				registerFailed: true,
+				message: active.message
 			}
 		}
 		case REGISTER_USER_SUCCESS: {
@@ -155,12 +157,12 @@ export const authReducer = (state = initialState, active: TAuthActions): TInitia
 		}
 		case UPDATE_USER_SUCCESS: {
 			return {
-				...state, updateUserRequest: false, updateUserFailed: true,
+				...state, updateUserRequest: false, updateUserSuccess: true,
 			}
 		}
 		case UPDATE_USER_ERROR: {
 			return {
-				...state, updateUserRequest: false, updateUserFailed: false, updateUserSuccess: true
+				...state, updateUserRequest: false, updateUserFailed: true, updateUserSuccess: false
 			}
 		}
 		default: {

@@ -22,6 +22,7 @@ const IngredientDetails = () => {
 		return null
 	}
 	
+	
 	return (<div className={styles.content}>
 		<div className={styles.image}>
 			<img src={ingredient.image_large} alt={ingredient.name}/>

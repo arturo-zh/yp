@@ -8,7 +8,7 @@ import {TIngredient} from "../../utils/types";
 type TIngredientDetailsState = {
 	currentIngredient: TIngredient | undefined
 }
-const initialState:TIngredientDetailsState = {
+export const initialState:TIngredientDetailsState = {
 	currentIngredient: undefined
 }
 

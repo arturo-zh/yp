@@ -13,7 +13,7 @@ type TInitialState = {
   resetFailed: boolean,
   resetSuccess: boolean,
 }
-const initialState:TInitialState = {
+export const initialState:TInitialState = {
   forgetRequest: false,
   forgetFailed: false,
   forgetSuccess: false,

@@ -46,8 +46,6 @@ const Order = ({isShow}: TOrderProps) => {
 		}
 	}, [data, id]);
 	
-	console.log(data);
-	
 	if (!data) {
 		return <Preloader/>
 	}

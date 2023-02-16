@@ -11,7 +11,7 @@ type TInitialState = {
 	items: TConstructorIngredient[] | []
 }
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
 	bun: null,
 	items: []
 }
@@ -36,11 +36,13 @@ export const burgerConstructorReducer = (state = initialState, action: TConstruc
 				...state,
 				items: data
 			}
+			
 		case ADD_BUN_CONSTRUCTOR:
 			return {
 				...state,
 				bun: action.ingredient
 			}
+			
 		case CLEAR_ORDER_ITEMS:
 			return {
 				...state,

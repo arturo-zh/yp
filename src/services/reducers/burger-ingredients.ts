@@ -19,7 +19,7 @@ type TIngredientsState = {
 	amountIngredient: TCounter | null
 }
 
-const initialState: TIngredientsState = {
+export const initialState: TIngredientsState = {
 	burgerIngredients: [],
 	burgerIngredientsRequest: false,
 	burgerIngredientsFailed: false,
@@ -69,7 +69,7 @@ export const burgerIngredientsReducer = (state = initialState, action: TBurgerIn
 		case CLEAR_INGREDIENT_AMOUNT:
 			return {
 				...state,
-				// amountIngredient: null,
+				amountIngredient: null,
 			}
 		default:
 			return state
