@@ -20,3 +20,13 @@ export type TConstructorIngredient = TIngredient & {
 export type TParams = {
 	id: string;
 };
+
+export type TOrder = {
+	createdAt: string;
+	ingredients: Array<string>;
+	name: string;
+	number: number;
+	status: string;
+	updatedAt: string;
+	_id: string;
+}

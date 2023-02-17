@@ -50,7 +50,7 @@ export function clearOrder(): AppThunk {
 		dispatch({
 			type: CLEAR_ORDER
 		});
-		dispatch(clearIngredientsAmount())
 		dispatch(clearOrderItems())
+		dispatch(clearIngredientsAmount())
 	}
 }

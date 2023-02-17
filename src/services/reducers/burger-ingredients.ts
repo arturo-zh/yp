@@ -16,15 +16,17 @@ type TIngredientsState = {
 	burgerIngredients: TIngredient[] | [];
 	burgerIngredientsRequest: boolean;
 	burgerIngredientsFailed: boolean;
-	amountIngredient: TCounter | null
+	amountIngredient: TCounter | null,
+	amountIngredientEmpty: TCounter | null,
 }
 
-const initialState: TIngredientsState = {
+export const initialState: TIngredientsState = {
 	burgerIngredients: [],
 	burgerIngredientsRequest: false,
 	burgerIngredientsFailed: false,
 	
 	amountIngredient: null,
+	amountIngredientEmpty: null,
 }
 
 
@@ -41,7 +43,8 @@ export const burgerIngredientsReducer = (state = initialState, action: TBurgerIn
 				burgerIngredients: action.ingredients,
 				burgerIngredientsRequest: false,
 				burgerIngredientsFailed: false,
-				amountIngredient: action.ingredients.reduce((obj: TCounter, item) => (obj[item._id] = 0, obj) , {})
+				amountIngredient: action.ingredients.reduce((obj: TCounter, item) => (obj[item._id] = 0, obj) , {}),
+				amountIngredientEmpty: action.ingredients.reduce((obj: TCounter, item) => (obj[item._id] = 0, obj) , {})
 			}
 		case GET_INGREDIENTS_ERROR:
 			return {
@@ -69,7 +72,7 @@ export const burgerIngredientsReducer = (state = initialState, action: TBurgerIn
 		case CLEAR_INGREDIENT_AMOUNT:
 			return {
 				...state,
-				// amountIngredient: null,
+				amountIngredient: state.amountIngredientEmpty
 			}
 		default:
 			return state

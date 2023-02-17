@@ -1,26 +1,26 @@
 import React, {useEffect} from "react";
 import styles from './feed.module.css';
 import OrderList from "../../components/order-list/order-list";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../../services/types/store";
 import {WS_CONNECTION_CLOSED, WS_CONNECTION_START} from "../../services/actions/socket";
-import {AppDispatch, RootState} from "../../services/types/store";
 import Preloader from "../../components/preloader/preloader";
 
 const VISIBLE_ORDERS_SLICE = 10
 
 export const FeedPage = () => {
-	const {wsConnected, messages, error} = useSelector((store:RootState) => store.ws);
-	const dispatch = useDispatch<AppDispatch>();
+	const {wsConnected, messages, error} = useSelector((store) => store.ws);
+	const dispatch = useDispatch();
+	
 	
 	useEffect(() => {
-		dispatch({type: WS_CONNECTION_START, payload: '/all' })
+		dispatch({type: WS_CONNECTION_START, payload: '/all'})
 		
 		return () => {
-			dispatch({ type: WS_CONNECTION_CLOSED })
+			dispatch({type: WS_CONNECTION_CLOSED})
 		}
 	}, [dispatch]);
 	
-	if(error) {
+	if (error) {
 		return <h1>Ошибка. Перезагрузите страницу</h1>
 	} else if (!wsConnected || !messages) {
 		return <Preloader/>
@@ -40,9 +40,10 @@ export const FeedPage = () => {
 								<p className={styles.statusTitle}>Готовы:</p>
 								<ul className={styles.statusList}>
 									{
-										messages["orders"].slice(0, VISIBLE_ORDERS_SLICE).map((item:any) => {
+										messages["orders"].slice(0, VISIBLE_ORDERS_SLICE).map((item) => {
 											return item["status"] === 'done' ?
-												<li className={`${styles.statusItem} ${styles.statusItemDone}`} key={item.number}>{item.number}</li> : null
+												<li className={`${styles.statusItem} ${styles.statusItemDone}`}
+												    key={item.number}>{item.number}</li> : null
 										})
 									}
 								</ul>
@@ -53,7 +54,7 @@ export const FeedPage = () => {
 								<p className={styles.statusTitle}>В работе:</p>
 								<div className={styles.statusList}>
 									{
-										messages["orders"].slice(0, VISIBLE_ORDERS_SLICE).map((item:any) => {
+										messages["orders"].slice(0, VISIBLE_ORDERS_SLICE).map((item) => {
 											return item["status"] === 'pending' ?
 												<li className={`${styles.statusItem}`} key={item.number}>{item.number}</li> : null
 										})

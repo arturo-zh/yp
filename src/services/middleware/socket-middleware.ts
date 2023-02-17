@@ -3,9 +3,8 @@ import {TWSActions} from "../actions/socket";
 import type {AppDispatch, RootState} from '../types/store';
 import {TWS} from "../types/ws";
 
-const wsUrl = "wss://norma.nomoreparties.space/orders";
 
-export const socketMiddleware = (wsActions: TWS): Middleware => {
+export const socketMiddleware = (wsActions: TWS, baseUrl: string): Middleware => {
 	return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
 		let socket: WebSocket | null = null;
 		return next => (action: TWSActions) => {
@@ -17,7 +16,7 @@ export const socketMiddleware = (wsActions: TWS): Middleware => {
 				if (socket !== null) {
 					socket.close();
 				}
-				socket = new WebSocket(`${wsUrl}${action.payload}`);
+				socket = new WebSocket(`${baseUrl}${action.payload}`);
 			}
 			
 			if (socket) {

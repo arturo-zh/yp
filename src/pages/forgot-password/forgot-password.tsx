@@ -1,14 +1,13 @@
 import React, {useCallback, useState} from "react";
 import {Button, EmailInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, Redirect} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {forgetPassword} from "../../services/actions/reset-password";
-import {AppDispatch, RootState} from "../../services/types/store";
+import {useDispatch, useSelector} from "../../services/types/store";
+import {forgetPassword} from "../../services/actions/reset-password"
 
 export const ForgotPasswordPage = () => {
   const [email, setEmail] = useState<string>('');
-  const {forgetSuccess} = useSelector((store:RootState) => store.resetPassword)
-  const dispatch = useDispatch<AppDispatch>();
+  const {forgetSuccess} = useSelector((store) => store.resetPassword)
+  const dispatch = useDispatch();
  
   const onSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     dispatch(forgetPassword(email));
