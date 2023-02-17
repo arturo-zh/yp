@@ -3,10 +3,9 @@ import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger
 import React, {useRef} from "react";
 import {useDrag, useDrop, XYCoord} from "react-dnd";
 import {moveIngredientConstructor, removeIngredientConstructor} from "../../services/actions/burger-constructor";
-import {useDispatch} from "react-redux";
+import {useDispatch} from "../../services/types/store";
 import {decreaseIngredient} from "../../services/actions/burger-ingredients";
 import {TConstructorIngredient} from "../../utils/types";
-import {AppDispatch} from "../../services/types/store";
 
 type TConstructorIngredientProps = {
 	ingredient: TConstructorIngredient;
@@ -14,7 +13,7 @@ type TConstructorIngredientProps = {
 };
 
 const ConstructorIngredient = ({ingredient, index}: TConstructorIngredientProps): JSX.Element => {
-	const dispatch = useDispatch<AppDispatch>();
+	const dispatch = useDispatch();
 	const ref = useRef<HTMLLIElement>(null);
 	
 	const [{isDragging}, dragRef] = useDrag({

@@ -5,9 +5,8 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {Link, useLocation} from 'react-router-dom';
 import {TData} from "../../services/types/order";
-import {useSelector} from "react-redux";
+import {useSelector} from "../../services/types/store";
 import {TIngredient} from "../../utils/types";
-import {RootState} from "../../services/types/store";
 
 const getOrderStatus = (status: string | undefined) => {
 	switch (status) {
@@ -30,13 +29,13 @@ type TOrderCardProps = {
 
 const OrderList = ({data, from, isShow}: TOrderCardProps): JSX.Element => {
 	const location = useLocation();
-	const ingredients = useSelector((store: RootState) => store.burgerIngredients.burgerIngredients);
+	const ingredients = useSelector((store) => store.burgerIngredients.burgerIngredients);
 	
 	return (
 		<>
 			{data["orders"].map((item, index) => {
 				let total = 0;
-				ingredients.map((elem: TIngredient) => {
+				ingredients.map((elem) => {
 					const count = item["ingredients"].reduce((prev, curr) => {
 						return curr === elem._id ? prev + 1 : prev
 					}, 0)
@@ -61,7 +60,7 @@ const OrderList = ({data, from, isShow}: TOrderCardProps): JSX.Element => {
 							<div className={styles.orderItemIngredients}>
 								{
 									item.ingredients.map((ingredient, index) => {
-										const ingredientInfo = ingredients.find((elem: any) => elem._id === ingredient)
+										const ingredientInfo = ingredients.find((elem: TIngredient) => elem._id === ingredient)
 										if (ingredientInfo) {
 											if (index < 5) {
 												return (

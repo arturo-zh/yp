@@ -16,18 +16,17 @@ import {
 } from "../../pages";
 import {BrowserRouter as Router, Route, Switch, useHistory, useLocation} from "react-router-dom";
 import ProtectedRoute from "../protected-route/protected-route";
-import {useDispatch} from "react-redux";
 import {getUserThunk} from "../../services/actions/auth";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Order from "../order/order";
 import Modal from "../modal/modal";
 import {HIDE_INGREDIENT_DETAILS} from "../../services/actions/ingredient-details";
 import {Location} from 'history';
-import {AppDispatch} from "../../services/types/store";
 import {getIngredients} from "../../services/actions/burger-ingredients";
+import {useDispatch} from "../../services/types/store";
 
 const App = () => {
-	const dispatch = useDispatch<AppDispatch>();
+	const dispatch = useDispatch();
 	
 	useEffect(() => {
 		dispatch(getUserThunk());
@@ -44,7 +43,7 @@ const App = () => {
 	
 	return (
 		<div className={styles.app}>
-			<Router>
+			<Router basename={process.env.PUBLIC_URL}>
 				<AppHeader/>
 				<main className={styles.main}>
 					<Switch>

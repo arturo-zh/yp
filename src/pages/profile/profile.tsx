@@ -3,8 +3,7 @@ import {NavLink} from "react-router-dom";
 import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {getUserThunk, logoutUser, updateUserThunk} from "../../services/actions/auth";
-import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, RootState} from "../../services/types/store";
+import {useDispatch, useSelector} from "../../services/types/store";
 
 
 export const ProfilePage = () => {
@@ -13,8 +12,8 @@ export const ProfilePage = () => {
 	const [password, setPassword] = useState<string>('');
 	
 	
-	const {user} = useSelector((store: RootState) => store.auth)
-	const dispatch = useDispatch<AppDispatch>();
+	const {user} = useSelector((store) => store.auth)
+	const dispatch = useDispatch();
 	
 	useEffect(() => {
 		dispatch(getUserThunk());

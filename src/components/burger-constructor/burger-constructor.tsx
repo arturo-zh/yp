@@ -3,7 +3,7 @@ import styles from './burger-constructor.module.css';
 import {ConstructorElement, CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-components';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
-import {useSelector, useDispatch} from "react-redux";
+import {useSelector, useDispatch} from "../../services/types/store";
 import {clearOrder, getOrder} from "../../services/actions/order-details";
 import {useDrop} from "react-dnd";
 import {addBunConstructor, addIngredientConstructor} from "../../services/actions/burger-constructor";
@@ -11,8 +11,8 @@ import uuid from 'react-uuid';
 import ConstructorIngredient from "../constructor-ingredient/constructor-ingredient";
 import {decreaseIngredient, increaseIngredient} from "../../services/actions/burger-ingredients";
 import Preloader from "../preloader/preloader";
-import {TConstructorIngredient, TIngredient} from "../../utils/types";
-import {AppDispatch, RootState} from "../../services/types/store";
+import {TConstructorIngredient} from "../../utils/types";
+import {RootState} from "../../services/types/store";
 
 const getBurgerConstructor = (state: RootState) => state.burgerConstructor;
 const getOrderDetails = (state: RootState) => state.orderDetails;
@@ -20,18 +20,18 @@ const getAuth = (state: RootState) => state.auth;
 
 const BurgerConstructor = (): JSX.Element => {
 	const {items: ingredients, bun} = useSelector(getBurgerConstructor);
-	const {order, orderRequest, orderFailed} = useSelector(getOrderDetails); 
+	const {order, orderRequest, orderFailed} = useSelector(getOrderDetails);
 	const {user} = useSelector(getAuth);
-	const dispatch = useDispatch<AppDispatch>();
+	const dispatch = useDispatch();
 	
 	const total: number = bun
 		? 2 * bun.price + (ingredients as TConstructorIngredient[]).reduce((prev, curr) => prev + curr.price, 0)
 		: (ingredients as TConstructorIngredient[]).reduce((prev, curr) => prev + curr.price, 0);
 	
 	const handleClick = useCallback(() => {
-		const orderData = ingredients.map((el: TIngredient) => el._id);
+		const orderData = [bun ? bun._id : '', ...ingredients.map((el) => el._id), bun ? bun._id : ''];
 		dispatch(getOrder(orderData));
-	}, [dispatch, ingredients]);
+	}, [dispatch, ingredients, bun]);
 	
 	const handleCloseModal = useCallback(() => {
 		dispatch(clearOrder());
@@ -76,7 +76,7 @@ const BurgerConstructor = (): JSX.Element => {
 				/>)}
 				<div className={styles.listingMid}>
 					<ul className={styles.listingItems}>
-						{ingredients.map((item:TConstructorIngredient, index:number) =>
+						{ingredients.map((item, index) =>
 							<ConstructorIngredient ingredient={item} key={item.key} index={index}/>
 						)}
 					</ul>

@@ -1,15 +1,14 @@
 import React, {useEffect} from 'react';
 import styles from './ingredient-details.module.css';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../../services/types/store";
 import {useParams} from "react-router-dom";
 import {SHOW_INGREDIENT_DETAILS} from "../../services/actions/ingredient-details";
 import {TIngredient, TParams} from "../../utils/types";
-import {AppDispatch, RootState} from "../../services/types/store";
 
 const IngredientDetails = () => {
-	const dispatch = useDispatch<AppDispatch>();
+	const dispatch = useDispatch();
 	const {id} = useParams<TParams>();
-	const ingredient = useSelector((store: RootState) => store.burgerIngredients.burgerIngredients).find((item:TIngredient) => item._id === id);
+	const ingredient = useSelector((store) => store.burgerIngredients.burgerIngredients).find((item:TIngredient) => item._id === id);
 	
 	useEffect(() => {
 		dispatch({

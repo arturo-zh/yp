@@ -3,16 +3,15 @@ import {NavLink} from "react-router-dom";
 import React, {useEffect} from "react";
 import {logoutUser} from "../../services/actions/auth";
 import OrderList from "../../components/order-list/order-list";
-import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, RootState} from "../../services/types/store";
+import {useDispatch, useSelector} from "../../services/types/store";
 import {WS_CONNECTION_CLOSED, WS_CONNECTION_START} from "../../services/actions/socket";
 import Preloader from "../../components/preloader/preloader";
 import {getCookie} from "../../utils/cookies";
 
 
 export const ProfileOrdersPage = () => {
-	const {wsConnected, messages, error} = useSelector((store:RootState) => store.ws);
-	const dispatch = useDispatch<AppDispatch>();
+	const {wsConnected, messages, error} = useSelector((store) => store.ws);
+	const dispatch = useDispatch();
 	
 	const handleLogout = () => {
 		dispatch(logoutUser());

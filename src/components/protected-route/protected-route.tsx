@@ -1,5 +1,5 @@
 import React from "react";
-import {useSelector} from "react-redux";
+import {useSelector} from "../../services/types/store";
 import {Redirect, Route, useLocation} from "react-router-dom";
 import {RootState} from "../../services/types/store";
 

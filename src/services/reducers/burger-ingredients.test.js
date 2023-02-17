@@ -43,6 +43,10 @@ describe('Burger ingredients reducer', () => {
       amountIngredient: {
         [bun._id]: 0,
         [ingredient._id]: 0
+      },
+      amountIngredientEmpty: {
+        [bun._id]: 0,
+        [ingredient._id]: 0
       }
     });
   });

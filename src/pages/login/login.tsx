@@ -2,16 +2,14 @@ import React, {useCallback, useState} from "react";
 import {Button, EmailInput, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, Redirect} from "react-router-dom";
 import {loginUser} from "../../services/actions/auth";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../../services/types/store";
 import Preloader from "../../components/preloader/preloader";
-import {AppDispatch, RootState} from "../../services/types/store";
-
 
 export const LoginPage = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const {message, authFailed, authSuccess, authRequest} = useSelector((store: RootState) => store.auth)
-  const dispatch = useDispatch<AppDispatch>();
+  const {message, authFailed, authSuccess, authRequest} = useSelector((store) => store.auth)
+  const dispatch = useDispatch();
  
   const onSubmit = useCallback((e:React.FormEvent<HTMLFormElement>) => {
     dispatch(loginUser({email, password}))
